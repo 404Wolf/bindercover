@@ -1,4 +1,24 @@
-\documentclass{standalone}
+\documentclass{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{fontspec}
+\setmainfont{rockwell.ttf}[ItalicFont=rockwelli.ttf]
+
 \begin{document}
-    % Your LaTeX content here
+
+    \verticalspace{1in}
+
+    \begin{center}
+        \fontsize{46}{46}\selectfont
+        {{course}} (S{{semester}}, {{year}})
+    \end{center}
+
+    \verticalspace{6in}
+
+    \begin{center}
+        \fontsize{34}{34}\selectfont
+        {{name}}
+        \emph{{{email}}, {{phone}}}
+    \end{center}
+
 \end{document}
