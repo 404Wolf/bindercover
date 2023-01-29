@@ -1,8 +1,9 @@
 import os
-from dataclasses import dataclass
 import subprocess
-from jinja2 import Template, Environment, FileSystemLoader
+from dataclasses import dataclass
 from typing import ClassVar
+
+from jinja2 import Environment, FileSystemLoader
 
 latex_jinja_env = Environment(
     block_start_string="\BLOCK{",
@@ -15,7 +16,7 @@ latex_jinja_env = Environment(
     line_comment_prefix="%#",
     trim_blocks=True,
     autoescape=False,
-    loader=FileSystemLoader("templates"),
+    loader=FileSystemLoader("./templates"),
 )
 
 

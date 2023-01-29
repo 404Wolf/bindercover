@@ -3,8 +3,9 @@ from random import randint
 from threading import Thread
 from time import sleep
 
-from flask import Flask, render_template, request, url_for, flash, redirect, send_file
-from bindercover.utils import BinderCover
+from flask import Flask, render_template, request, send_file
+
+from utils import BinderCover
 
 app = Flask(__name__)
 
@@ -26,7 +27,7 @@ def generate():
         phone=request.form["phone"],
     )
     # Generate a PDF file from the bindercover template
-    bindercover.generate_pdf(filename := f"{randint(100000, 999999)}")
+    bindercover.generate_pdf(filename := f"{randint(1000000, 9999999)}")
 
     # Schedule the PDF for deletion after 10 seconds
     def delete_file():
