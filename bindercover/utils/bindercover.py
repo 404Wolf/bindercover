@@ -1,6 +1,22 @@
+import os
 from dataclasses import dataclass
-import pylatex as pl
-from pylatex.utils import italic, bold
+import subprocess
+from jinja2 import Template, Environment, FileSystemLoader
+from typing import ClassVar
+
+latex_jinja_env = Environment(
+    block_start_string="\BLOCK{",
+    block_end_string="}",
+    variable_start_string="\VAR{",
+    variable_end_string="}",
+    comment_start_string="\#{",
+    comment_end_string="}",
+    line_statement_prefix="%%",
+    line_comment_prefix="%#",
+    trim_blocks=True,
+    autoescape=False,
+    loader=FileSystemLoader("templates"),
+)
 
 
 @dataclass(kw_only=True, slots=True)
@@ -12,50 +28,49 @@ class BinderCover:
     email: str
     phone: str
 
-    def generate_pdf(self):
-        doc = pl.Document(documentclass="article")
+    template: ClassVar = latex_jinja_env.get_template("bindercover.tex")
 
-        # hide page numbers
-        doc.append(pl.Command("pagestyle", "empty"))
+    def generate_pdf(self, filename: str):
+        """
+        Generates a PDF file from the bindercover template and return the filename.
 
-        doc.packages.append(pl.Package("geometry", options=("margin=1in",)))
-        doc.packages.append(pl.Package("fontspec"))
-        doc.append(
-            pl.Command(
-                "setmainfont",
-                arguments=("rockwell.tff",),
-                options=(
-                    "ItalicFont=rockwell-italic.TFF",
-                ),
-            )
+        Args:
+            filename (str): The filename of the generated PDF file.
+                Omit the file extension; it will be set to .pdf automatically.
+
+        Returns:
+            str: The filename of the generated PDF file.
+        """
+        # Set the semester/year string depending on the user input
+        if self.semester == "":
+            semesterYear = self.year
+        elif self.year == "":
+            semesterYear = f"S{self.semester}"
+        else:
+            semesterYear = f"S{self.semester}, {self.year}"
+
+        # Depending on the length of the course name, adjust the
+        generated = self.template.render(
+            name=self.name,
+            course=self.course,
+            semesterYear=semesterYear,
+            email=self.email,
+            phone=self.phone
         )
 
-        doc.append(pl.VerticalSpace("1in"))
+        # Write the generated template to a file
+        with open(f"generated/{filename}.tex", "w") as f:
+            f.write(generated)
 
-        # Add the name of the course and semester
-        centered = pl.Center()
-        centered.append(pl.Command("fontsize", arguments=("46pt", "46pt")))
-        centered.append(pl.Command("selectfont"))
-        centered.append(f"{self.course} (S{self.semester})")
-        doc.append(centered)
+        # Compile the generated LaTeX template to a PDF file
+        subprocess.run(
+            [
+                "xelatex",
+                "-output-directory",
+                "generated",
+                f"generated/{filename}.tex",
+            ]
+        )
 
-        # Add the name of the person to near the bottom
-        centered = pl.Center()
-        centered.append(pl.VerticalSpace("6in"))
-        centered.append(pl.Command("fontsize", arguments=("24pt", "24pt")))
-        centered.append(pl.Command("selectfont"))
-        centered.append(f"{self.name}")
-        centered.append(italic(f"({self.email}, {self.phone})"))
-        doc.append(centered)
-
-        doc.generate_pdf("test", clean_tex=False, compiler="xelatex")
-
-
-test = BinderCover(
-    name="John Smith",
-    course="English",
-    semester="1",
-    email="John@smith.com",
-    phone="(929)555-5555",
-)
-test.generate_pdf()
+        # Remove the .tex file
+        os.remove(f"generated/{filename}.tex")

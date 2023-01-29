@@ -1,1 +1,1 @@
-from utils.bindercover import BinderCover
+from bindercover.utils.bindercover import BinderCover
