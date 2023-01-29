@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="static/styles.css">
+        <link rel="stylesheet" href="static/classes.css">
+        <title>Binder Cover Generator</title>
+    </head>
+
+    <body>
+        <h1 class="tile">
+            Binder Cover Generator
+        </h1>
+
+        <div style="display: flex; justify-content: space-between; align-items: stretch;">
+            <div style="flex: 65%" class="tile">
+                <p style="text-align: center">
+                    Information entered below is never stored, and is only processed to generate a PDF binder cover. Fields left blank will not be included on your cover. Once you have entered your binder cover's info, click the "Generate PDF" button to proceed.
+                </p>
+            </div>
+            <div style="flex: 35%; text-align: center" class="tile">
+                <div style="display: flex; text-align: left">
+                    <div style="flex: 30%">
+                        Name: 
+                        <div class="spacer"></div>
+
+                        Course: 
+                        <div class="spacer"></div>
+
+                        Semester: 
+                        <div class="spacer"></div>
+
+                        Email: 
+                        <div class="spacer"></div>
+
+                        Phone: 
+                        <div class="spacer"></div>
+                    </div>
+
+                    <div style="flex: 70%">
+                        <form method="post" id="pdf-fields">
+                            <input name="name" placeholder="John Smith" class="max-width" required/>
+                            <div class="spacer"></div>
+
+                            <input name="course" placeholder="Calculus 1" class="max-width" required/>
+                            <div class="spacer"></div>
+
+                            <input name="semester" placeholder="1" class="max-width"/>
+                            <div class="spacer"></div>
+
+                            <input name="email" placeholder="john@smith.com" class="max-width"/>
+                            <div class="spacer"></div>
+
+                            <input name="phone" placeholder="(012)345-6789" class="max-width"/>
+                            <div class="spacer"></div><br>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Because the button is outside of the form, it must be linked with js -->
+                <button style="min-width: 170px" onclick="document.getElementById('pdf-fields').submit()" type="submit" id="generate-pdf">
+                    Generate PDF
+                </button>
+
+            </div>
+        </div>
+
+  </body>
+</html>

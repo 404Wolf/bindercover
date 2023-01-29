@@ -1,0 +1,27 @@
+.flex-container {
+    display: flex;
+}
+
+.tile {
+    /* Set the styles of the tile */
+    background-color: rgb(180, 180, 180);
+    border-radius: 15px;
+
+    /* Add padding to the tile */
+    padding-top: 15px;
+    padding-left: 25px;
+    padding-right: 25px;
+    padding-bottom: 25px;
+
+    /* Add margin to the tile */
+    margin: 10px
+}
+
+.spacer {
+    /* A way to make <div>s into spacers */
+    margin-top: 6px
+}
+
+.max-width {
+    width: 100%;
+}
