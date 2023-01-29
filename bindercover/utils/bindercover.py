@@ -72,5 +72,7 @@ class BinderCover:
             ]
         )
 
-        # Remove the .tex file
+        # Remove the .tex .log and .aux files
         os.remove(f"generated/{filename}.tex")
+        os.remove(f"generated/{filename}.log")
+        os.remove(f"generated/{filename}.aux")
