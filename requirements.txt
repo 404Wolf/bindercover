@@ -1,3 +1,2 @@
 flask
-pylatex
 jinja2

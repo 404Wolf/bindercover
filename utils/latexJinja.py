@@ -39,7 +39,7 @@ class LatexTemplate:
         Returns:
             str: The rendered template.
         """
-        for key, value in tuple(kwargs.items()):
-            value = value.replace("|", "\\|")
-            kwargs[key] = f"\\lstinline|{value}|"
+        # for key, value in tuple(kwargs.items()):
+        #     value = value.replace("|", "\\|")
+        #     kwargs[key] = f"\\lstinline|{value}|"
         return self.template.render(**kwargs)

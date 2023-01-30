@@ -35,16 +35,16 @@ def format_phone_number(phone_number):
     return f"({phone_number[:3]}) {phone_number[3:6]}-{phone_number[6:10]}"
 
 
-@dataclass(kw_only=True, slots=True)
+@dataclass()
 class BinderCover:
-    name: str
-    course1: str
-    course2: str
-    course3: str
-    semester: str
-    year: str
-    email: str
-    phone: str
+    name: str = ""
+    course1: str = ""
+    course2: str = ""
+    course3: str = ""
+    semester: str = ""
+    year: str = ""
+    email: str = ""
+    phone: str = ""
 
     renderer: ClassVar = LatexTemplate("./templates", "bindercover.tex")
 
@@ -65,13 +65,13 @@ class BinderCover:
             course1=self.course1,
             course2=self.course2,
             course3=self.course3,
-            course2ExistsAnd="&" if self.course2 != "" else "",
-            course3ExistsAnd="&" if self.course3 != "" else "",
+            course2ExistsAnd=r"\linebreak\&\linebreak" if self.course2 != "" else "",
+            course3ExistsAnd=r"\linebreak\&\linebreak" if self.course3 != "" else "",
             semesterYear=merge_strings(f"S{self.semester}", self.year),
             email=self.email,
             phone=format_phone_number(self.phone).replace("-", "===?"),
         )
-        generated = generated.replace("===?", "| \\verb|-| \\lstinline|")
+        generated = generated.replace("===?", "\\verb|-|")
 
         # Write the generated template to a file
         with open(f"generated/{filename}.tex", "w") as f:
