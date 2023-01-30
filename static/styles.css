@@ -1,5 +1,5 @@
 body {
-    background-color: rgb(200, 200, 200);
+    background-color: rgb(220, 220, 220);
     font-family: "Verdana", Sans, Serif;
     padding: 25px;
     line-height: 1.55;
@@ -16,8 +16,20 @@ p {
 }
 
 input {
+    font-size: 12px;
     border-radius: 6px;
     height: 15px;
+    max-width: 200px;
+}
+
+form {
+    text-align: center;
+}
+
+label {
+    display: inline-block;
+    width: 150px;
+    text-align: right;
 }
 
 button {
@@ -25,4 +37,9 @@ button {
     font-size: 20px;
     border-radius: 20px;
     text-align: center;
+    background-color: rgb(240, 240, 240);
+}
+
+a {
+    color: rgb(10, 10, 10);
 }

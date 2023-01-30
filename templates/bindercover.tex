@@ -1,7 +1,12 @@
 \documentclass{article}
 
-\usepackage[margin=1.5in]{geometry}
+\usepackage[margin=1.25in]{geometry}
 \usepackage{fontspec}
+\usepackage{listings}
+\lstset{
+    breaklines=true
+}
+
 \setmainfont{rockwell.ttf}
 \pagenumbering{gobble}
 
@@ -9,7 +14,27 @@
 
     \begin{center}
         \fontsize{62}{62}\selectfont
-        \VAR{course}
+        \VAR{course1}
+    \end{center}
+
+    \begin{center}
+        \fontsize{40}{40}\selectfont
+        \VAR{course2ExistsAnd}
+    \end{center}
+
+    \begin{center}
+        \fontsize{62}{62}\selectfont
+        \VAR{course2}
+    \end{center}
+
+    \begin{center}
+        \fontsize{40}{40}\selectfont
+        \VAR{course3ExistsAnd}
+    \end{center}
+
+    \begin{center}
+        \fontsize{62}{62}\selectfont
+        \VAR{course3}
     \end{center}
 
     \vspace{.05in}
@@ -31,6 +56,11 @@
     \begin{center}
         \fontsize{24}{24}\selectfont
         \VAR{email}
+    \end{center}
+
+    \begin{center}
+        \fontsize{24}{24}\selectfont
+        \VAR{phone}
     \end{center}
 
 \end{document}

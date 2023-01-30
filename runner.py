@@ -15,12 +15,14 @@ def index():
     return render_template("index.html")
 
 
-@app.post("/generate")
+@app.post("/form/generate")
 def generate():
     # Create a BinderCover object from the user input
     bindercover = BinderCover(
         name=request.form["name"],
-        course=request.form["course"],
+        course1=request.form["course1"] or "",
+        course2=request.form["course2"] or "",
+        course3=request.form["course3"] or "",
         semester=request.form["semester"],
         year=request.form["year"],
         email=request.form["email"],
@@ -41,4 +43,4 @@ def generate():
 
 
 if __name__ == "__main__":
-    app.run()
+    app.run(host='0.0.0.0')

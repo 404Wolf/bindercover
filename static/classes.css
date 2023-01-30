@@ -4,7 +4,7 @@
 
 .tile {
     /* Set the styles of the tile */
-    background-color: rgb(180, 180, 180);
+    background-color: rgb(200, 200, 200);
     border-radius: 15px;
 
     /* Add padding to the tile */
@@ -24,4 +24,8 @@
 
 .max-width {
     width: 100%;
+}
+
+.max-height {
+    height: 100%;
 }
